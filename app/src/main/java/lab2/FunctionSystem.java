@@ -10,7 +10,6 @@ public class FunctionSystem {
     private final Trigonometry trigonometry;
     private final Logarithm logarithm;
 
-    // Конструктор с возможностью инъекции зависимостей
     public FunctionSystem() {
         this(1e-4, new Trigonometry(), new Logarithm());
     }
@@ -45,7 +44,7 @@ public class FunctionSystem {
         double log10X = logarithm.log(x, 10);
 
         double temp = lnX * log5X;
-        double powPart = trigonometry.pow(temp, 12); // Оставил статическим, можно вынести в зависимость
+        double powPart = trigonometry.pow(temp, 12);
         return powPart * (log3X - log5X - log10X);
     }
 }

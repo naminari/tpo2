@@ -18,7 +18,6 @@ class SecantCalculatorTest {
         secantCalculator = new SecantCalculator();
     }
 
-    // Проверка основных значений
     @Test
     void shouldCalculateForZero() {
         assertEquals(1.0, secantCalculator.calculate(0.0), 1e-10);
@@ -29,14 +28,12 @@ class SecantCalculatorTest {
         assertEquals(-1.0, secantCalculator.calculate(Math.PI), 1e-5);
     }
 
-    // Проверка особых случаев (где cos(x) = 0)
     @ParameterizedTest
     @ValueSource(doubles = {Math.PI/2, -Math.PI/2, 3*Math.PI/2})
     void shouldThrowExceptionWhenCosZero(double x) {
         assertThrows(ArithmeticException.class, () -> secantCalculator.calculate(x));
     }
 
-    // Проверка периодичности
     @Test
     void shouldBePeriodic() {
         double x = Math.PI/3;
@@ -47,7 +44,6 @@ class SecantCalculatorTest {
         );
     }
 
-    // Параметризованный тест из CSV
     @ParameterizedTest(name = "sec({0}) ≈ {1}")
     @CsvFileSource(resources = "/module/sec.csv", numLinesToSkip = 1, delimiter = ',')
     void testSecantCalculation(double x, double expected) {

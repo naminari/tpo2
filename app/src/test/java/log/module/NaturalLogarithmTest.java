@@ -17,7 +17,6 @@ class NaturalLogarithmTest {
         naturalLogarithm = new NaturalLogarithm();
     }
 
-    // Проверка основных значений
     @Test
     void shouldCalculateForOne() {
         assertEquals(0.0, naturalLogarithm.calculate(1.0), 1e-5);
@@ -28,14 +27,12 @@ class NaturalLogarithmTest {
         assertEquals(1.0, naturalLogarithm.calculate(Math.E), 1e-5);
     }
 
-    // Проверка особых случаев
     @ParameterizedTest
     @ValueSource(doubles = {0, -1, -100, Double.NEGATIVE_INFINITY})
     void shouldReturnNaNForNonPositive(double y) {
         assertEquals(Double.NaN, naturalLogarithm.calculate(y));
     }
 
-    // Проверка точности вычислений
     @Test
     void shouldBePreciseForSmallValues() {
         assertEquals(Math.log(1e-10), naturalLogarithm.calculate(1e-10), 1e-5);
@@ -46,7 +43,6 @@ class NaturalLogarithmTest {
         assertEquals(Math.log(1e10), naturalLogarithm.calculate(1e10), 1e-5);
     }
 
-    // Параметризованный тест из CSV
     @ParameterizedTest(name = "ln({0}) ≈ {1}")
     @CsvFileSource(resources = "/module/ln.csv", numLinesToSkip = 1, delimiter = ',')
     void testLogarithmCalculation(double y, double expected) {

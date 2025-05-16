@@ -26,23 +26,20 @@ public class NaturalLogarithm {
         if (y <= 0) return Double.NaN;
         if (stubs.containsKey(y)) return stubs.get(y);
 
-        // Ищем логарифм как x, такой что e^x = y
-        // Шаг 1: находим начальный диапазон [low, high], где exp(low) < y < exp(high)
         double low = -1.0;
         double high = 1.0;
 
         while (expCalculator.calculate(high, epsilon) < y) {
             low = high;
             high *= 2;
-            if (high > 1e6) return Double.POSITIVE_INFINITY; // ограничение по диапазону
+            if (high > 1e6) return Double.POSITIVE_INFINITY;
         }
         while (expCalculator.calculate(low, epsilon) > y) {
             high = low;
             low *= 2;
-            if (low < -1e6) return Double.NEGATIVE_INFINITY; // ограничение по диапазону
+            if (low < -1e6) return Double.NEGATIVE_INFINITY;
         }
 
-        // Шаг 2: бинарный поиск
         double mid = 0.0;
         while (high - low > epsilon) {
             mid = (low + high) / 2;

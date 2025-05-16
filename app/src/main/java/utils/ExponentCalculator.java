@@ -26,7 +26,6 @@ public class ExponentCalculator {
             return half * half;
         }
 
-        // теперь x ∈ [0, 1], можно безопасно использовать ряд
         double result = 1.0;
         double term = 1.0;
         int n = 1;

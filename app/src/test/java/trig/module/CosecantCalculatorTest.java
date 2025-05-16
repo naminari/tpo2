@@ -18,7 +18,6 @@ class CosecantCalculatorTest {
         cosecantCalculator = new CosecantCalculator();
     }
 
-    // Проверка основных значений
     @Test
     void shouldCalculateForPiOverTwo() {
         assertEquals(1.0, cosecantCalculator.calculate(Math.PI/2), 1e-5);
@@ -29,14 +28,12 @@ class CosecantCalculatorTest {
         assertEquals(-1.0, cosecantCalculator.calculate(-Math.PI/2), 1e-5);
     }
 
-    // Проверка особых случаев (где sin(x) = 0)
     @ParameterizedTest
     @ValueSource(doubles = {0, Math.PI, -Math.PI, 2*Math.PI})
     void shouldThrowExceptionWhenSinZero(double x) {
         assertThrows(ArithmeticException.class, () -> cosecantCalculator.calculate(x));
     }
 
-    // Проверка периодичности
     @Test
     void shouldBePeriodic() {
         double x = Math.PI/4;
@@ -47,7 +44,6 @@ class CosecantCalculatorTest {
         );
     }
 
-    // Параметризованный тест из CSV
     @ParameterizedTest(name = "csc({0}) ≈ {1}")
     @CsvFileSource(resources = "/module/csc.csv", numLinesToSkip = 1, delimiter = ',')
     void testCosecantCalculation(double x, double expected) {

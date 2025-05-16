@@ -17,7 +17,6 @@ class GeneralLogarithmTest {
         generalLogarithm = new GeneralLogarithm();
     }
 
-    // Проверка основных значений
     @Test
     void shouldCalculateCommonLogarithm() {
         assertEquals(2.0, generalLogarithm.calculate(100, 10), 1e-5);
@@ -41,7 +40,6 @@ class GeneralLogarithmTest {
         assertEquals(Double.NaN, generalLogarithm.calculate(10, base));
     }
 
-    // Параметризованный тест из CSV
     @ParameterizedTest(name = "log_{1}({0}) ≈ {2}")
     @CsvFileSource(resources = "/module/log.csv", numLinesToSkip = 1, delimiter = ',')
     void testGeneralLogarithm(double x, double base, double expected) {

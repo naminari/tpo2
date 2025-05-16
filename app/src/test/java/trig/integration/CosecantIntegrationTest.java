@@ -22,10 +22,8 @@ class CosecantIntegationTest {
 
     @Test
     void shouldCalculateUsingSineCalculator() {
-        // Настраиваем mock
         when(sineCalculator.calculate(1.0)).thenReturn(0.8414709848);
 
-        // Проверяем
         assertEquals(1.188395106, cosecantCalculator.calculate(1.0), 1e-6);
         verify(sineCalculator).calculate(1.0);
     }

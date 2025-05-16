@@ -20,16 +20,14 @@ public class SineCalculator {
             throw new IllegalArgumentException("Invalid input: " + x);
         }
 
-        // Проверяем, есть ли заглушка
         if (stubs.containsKey(x)) {
             return stubs.get(x);
         }
 
-        // Нормализация в диапазон [-π, π]
         x = normalize(x);
 
-        double term = x;    // первый член ряда
-        double sum  = term; // сразу добавляем
+        double term = x;
+        double sum  = term;
         int n = 1;
 
         while (Math.abs(term) > DEFAULT_EPSILON) {
@@ -42,7 +40,6 @@ public class SineCalculator {
     }
 
     private double normalize(double x) {
-        // Остаток от деления на 2π, результат в [-π, π]
         return Math.IEEEremainder(x, 2 * Math.PI);
     }
 }

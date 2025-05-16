@@ -10,7 +10,6 @@ import trig.Trigonometry;
 public class CSVExporter {
     private static final String SEPARATOR = ";";
 
-    // Создаем экземпляры
     private static final Trigonometry trig = new Trigonometry();
     private static final Logarithm log = new Logarithm();
     private static final FunctionSystem system = new FunctionSystem(1e-4, trig, log);
@@ -19,10 +18,8 @@ public class CSVExporter {
         String fileName = String.format("%.2f_Результаты_модуля_(%s).csv", startX, moduleName);
 
         try (FileWriter writer = new FileWriter(fileName)) {
-            // Заголовок
             writer.write("x" + SEPARATOR + "result\n");
 
-            // Данные
             for (double x = startX; x <= endX; x += step) {
                 double result = computeModule(moduleName, x);
                 writer.write(x + SEPARATOR + result + "\n");

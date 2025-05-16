@@ -22,9 +22,7 @@ class SecantIntegrationTest {
 
     @Test
     void shouldCalculateUsingCosineCalculator() {
-        // Настраиваем mock
         when(cosineCalculator.calculate(1.0, 1e-7)).thenReturn(0.5403023059);
-        // Проверяем
         assertEquals(1.850815718, secantCalculator.calculate(1.0), 1e-6);
         verify(cosineCalculator).calculate(1.0, 1e-7);
     }
