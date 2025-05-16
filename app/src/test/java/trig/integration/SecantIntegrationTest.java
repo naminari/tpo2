@@ -23,18 +23,18 @@ class SecantIntegrationTest {
     @Test
     void shouldCalculateUsingCosineCalculator() {
         // Настраиваем mock
-        when(cosineCalculator.calculate(1.0, 1e-10)).thenReturn(0.5403023059);
-
+        when(cosineCalculator.calculate(1.0, 1e-7)).thenReturn(0.5403023059);
         // Проверяем
         assertEquals(1.850815718, secantCalculator.calculate(1.0), 1e-6);
-        verify(cosineCalculator).calculate(1.0, 1e-10);
+        verify(cosineCalculator).calculate(1.0, 1e-7);
     }
 
     @Test
     void shouldThrowWhenCosineReturnsZero() {
-        when(cosineCalculator.calculate(Math.PI/2, 1e-10)).thenReturn(0.0);
+        when(cosineCalculator.calculate(Math.PI/2, 1e-5)).thenReturn(0.0);
 
-        assertThrows(ArithmeticException.class, () -> secantCalculator.calculate(Math.PI/2));
+        assertThrows(ArithmeticException.class, () -> secantCalculator.calculate(Math.PI / 2, 1e-5));
+
     }
 
     @Test

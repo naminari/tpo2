@@ -6,7 +6,7 @@ import java.util.Map;
 import utils.AngleNormalizer;
 
 public class CosineCalculator {
-    public static final double DEFAULT_EPSILON = 1e-10;
+    public static final double DEFAULT_EPSILON = 1e-7;
     private final Map<Double, Double> stubs = new HashMap<>();
     
     public void addStub(double x, double value) {
@@ -14,6 +14,11 @@ public class CosineCalculator {
     }
     
     public double calculate(double x, double epsilon) {
+
+        if (Double.isNaN(x) || Double.isInfinite(x)) {
+            throw new IllegalArgumentException("Invalid input: NaN or Infinite");
+        }
+
         x = AngleNormalizer.normalize(x);
         if (stubs.containsKey(x)) {
             return stubs.get(x);

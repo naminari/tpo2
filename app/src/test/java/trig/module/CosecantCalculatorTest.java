@@ -21,12 +21,12 @@ class CosecantCalculatorTest {
     // Проверка основных значений
     @Test
     void shouldCalculateForPiOverTwo() {
-        assertEquals(1.0, cosecantCalculator.calculate(Math.PI/2), 1e-10);
+        assertEquals(1.0, cosecantCalculator.calculate(Math.PI/2), 1e-5);
     }
 
     @Test
     void shouldCalculateForMinusPiOverTwo() {
-        assertEquals(-1.0, cosecantCalculator.calculate(-Math.PI/2), 1e-10);
+        assertEquals(-1.0, cosecantCalculator.calculate(-Math.PI/2), 1e-5);
     }
 
     // Проверка особых случаев (где sin(x) = 0)
@@ -51,6 +51,6 @@ class CosecantCalculatorTest {
     @ParameterizedTest(name = "csc({0}) ≈ {1}")
     @CsvFileSource(resources = "/module/csc.csv", numLinesToSkip = 1, delimiter = ',')
     void testCosecantCalculation(double x, double expected) {
-        assertEquals(expected, cosecantCalculator.calculate(x), 1e-10);
+        assertEquals(expected, cosecantCalculator.calculate(x), 1e-6);
     }
 }

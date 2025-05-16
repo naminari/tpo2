@@ -23,25 +23,25 @@ class CosecantIntegationTest {
     @Test
     void shouldCalculateUsingSineCalculator() {
         // Настраиваем mock
-        when(sineCalculator.calculate(1.0, 1e-10)).thenReturn(0.8414709848);
+        when(sineCalculator.calculate(1.0)).thenReturn(0.8414709848);
 
         // Проверяем
         assertEquals(1.188395106, cosecantCalculator.calculate(1.0), 1e-6);
-        verify(sineCalculator).calculate(1.0, 1e-10);
+        verify(sineCalculator).calculate(1.0);
     }
 
     @Test
     void shouldThrowWhenSineReturnsZero() {
-        when(sineCalculator.calculate(0.0, 1e-10)).thenReturn(0.0);
+        when(sineCalculator.calculate(0.0)).thenReturn(0.0);
 
         assertThrows(ArithmeticException.class, () -> cosecantCalculator.calculate(0.0));
     }
 
     @Test
     void shouldUseCustomEpsilon() {
-        when(sineCalculator.calculate(0.5, 1e-5)).thenReturn(0.4794255386);
+        when(sineCalculator.calculate(0.5)).thenReturn(0.4794255386);
 
         assertEquals(2.085829642, cosecantCalculator.calculate(0.5, 1e-5), 1e-6);
-        verify(sineCalculator).calculate(0.5, 1e-5);
+        verify(sineCalculator).calculate(0.5);
     }
 }

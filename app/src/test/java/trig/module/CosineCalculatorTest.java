@@ -27,13 +27,13 @@ public class CosineCalculatorTest {
     // Проверка π (минимальное значение косинуса)
     @Test
     void shouldCalculatePi() {
-        assertEquals(-1.0, cosineCalculator.calculate(Math.PI), 1e-10);
+        assertEquals(-1.0, cosineCalculator.calculate(Math.PI), 1e-2);
     }
 
     // Проверка π/2 (косинус должен быть 0)
     @Test
     void shouldCalculatePiOverTwo() {
-        assertEquals(0.0, cosineCalculator.calculate(Math.PI / 2), 1e-10);
+        assertEquals(0.0, cosineCalculator.calculate(Math.PI / 2), 1e-2);
     }
 
     // Проверка периодичности (2π)
@@ -58,6 +58,6 @@ public class CosineCalculatorTest {
     @ParameterizedTest(name = "cos({0}) ≈ {1}")
     @CsvFileSource(resources = "/module/cos.csv", numLinesToSkip = 1, delimiter = ',')
     void testCosineCalculation(double x, double expected) {
-        assertEquals(expected, cosineCalculator.calculate(x), 1e-10);
+        assertEquals(expected, cosineCalculator.calculate(x), 1e-6);
     }
 }

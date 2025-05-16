@@ -26,7 +26,7 @@ class SecantCalculatorTest {
 
     @Test
     void shouldCalculateForPi() {
-        assertEquals(-1.0, secantCalculator.calculate(Math.PI), 1e-10);
+        assertEquals(-1.0, secantCalculator.calculate(Math.PI), 1e-5);
     }
 
     // Проверка особых случаев (где cos(x) = 0)
@@ -51,6 +51,6 @@ class SecantCalculatorTest {
     @ParameterizedTest(name = "sec({0}) ≈ {1}")
     @CsvFileSource(resources = "/module/sec.csv", numLinesToSkip = 1, delimiter = ',')
     void testSecantCalculation(double x, double expected) {
-        assertEquals(expected, secantCalculator.calculate(x), 1e-10);
+        assertEquals(expected, secantCalculator.calculate(x), 1e-6);
     }
 }

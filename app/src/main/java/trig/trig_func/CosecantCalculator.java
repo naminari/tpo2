@@ -12,7 +12,7 @@ public class CosecantCalculator {
     }
     
     public double calculate(double x, double epsilon) {
-        double sinValue = sineCalculator.calculate(x, epsilon);
+        double sinValue = sineCalculator.calculate(x);
         if (Math.abs(sinValue) < epsilon) {
             throw new ArithmeticException("Cosecant is undefined for sin(x) = 0");
         }

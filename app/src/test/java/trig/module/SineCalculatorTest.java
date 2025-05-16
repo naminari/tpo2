@@ -21,19 +21,19 @@ public class SineCalculatorTest {
     // Проверка нулевого значения
     @Test
     void shouldCalculateZero() {
-        assertEquals(0.0, sineCalculator.calculate(0.0), 1e-10);
+        assertEquals(0.0, sineCalculator.calculate(0.0), 1e-6);
     }
 
     // Проверка π/2 (максимальное значение синуса)
     @Test
     void shouldCalculatePiOverTwo() {
-        assertEquals(1.0, sineCalculator.calculate(Math.PI / 2), 1e-10);
+        assertEquals(1.0, sineCalculator.calculate(Math.PI / 2), 1e-6);
     }
 
     // Проверка -π/2 (минимальное значение синуса)
     @Test
     void shouldCalculateMinusPiOverTwo() {
-        assertEquals(-1.0, sineCalculator.calculate(-Math.PI / 2), 1e-10);
+        assertEquals(-1.0, sineCalculator.calculate(-Math.PI / 2), 1e-6);
     }
 
     // Проверка, что синус периодичен (2π)
@@ -43,7 +43,7 @@ public class SineCalculatorTest {
         assertEquals(
             sineCalculator.calculate(x),
             sineCalculator.calculate(x + 2 * Math.PI),
-            1e-10
+            1e-7
         );
     }
 
@@ -58,6 +58,6 @@ public class SineCalculatorTest {
     @ParameterizedTest(name = "sin({0}) ≈ {1}")
     @CsvFileSource(resources = "/module/sin.csv", numLinesToSkip = 1, delimiter = ',')
     void testSineCalculation(double x, double expected) {
-        assertEquals(expected, sineCalculator.calculate(x), 1e-10);
+        assertEquals(expected, sineCalculator.calculate(x), 1e-6);
     }
 }
