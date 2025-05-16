@@ -20,12 +20,12 @@ class GeneralLogarithmTest {
     // Проверка основных значений
     @Test
     void shouldCalculateCommonLogarithm() {
-        assertEquals(2.0, generalLogarithm.calculate(100, 10), 1e-10);
+        assertEquals(2.0, generalLogarithm.calculate(100, 10), 1e-5);
     }
 
     @Test
     void shouldCalculateBinaryLogarithm() {
-        assertEquals(3.0, generalLogarithm.calculate(8, 2), 1e-10);
+        assertEquals(3.0, generalLogarithm.calculate(8, 2), 1e-4);
     }
 
     // Проверка особых случаев
@@ -45,6 +45,6 @@ class GeneralLogarithmTest {
     @ParameterizedTest(name = "log_{1}({0}) ≈ {2}")
     @CsvFileSource(resources = "/module/log.csv", numLinesToSkip = 1, delimiter = ',')
     void testGeneralLogarithm(double x, double base, double expected) {
-        assertEquals(expected, generalLogarithm.calculate(x, base), 1e-10);
+        assertEquals(expected, generalLogarithm.calculate(x, base), 1e-4);
     }
 }

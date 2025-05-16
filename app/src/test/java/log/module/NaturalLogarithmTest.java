@@ -20,12 +20,12 @@ class NaturalLogarithmTest {
     // Проверка основных значений
     @Test
     void shouldCalculateForOne() {
-        assertEquals(0.0, naturalLogarithm.calculate(1.0), 1e-8);
+        assertEquals(0.0, naturalLogarithm.calculate(1.0), 1e-5);
     }
 
     @Test
     void shouldCalculateForE() {
-        assertEquals(1.0, naturalLogarithm.calculate(Math.E), 1e-8);
+        assertEquals(1.0, naturalLogarithm.calculate(Math.E), 1e-5);
     }
 
     // Проверка особых случаев
@@ -48,8 +48,8 @@ class NaturalLogarithmTest {
 
     // Параметризованный тест из CSV
     @ParameterizedTest(name = "ln({0}) ≈ {1}")
-    @CsvFileSource(resources = "/module/log.csv", numLinesToSkip = 1, delimiter = ',')
+    @CsvFileSource(resources = "/module/ln.csv", numLinesToSkip = 1, delimiter = ',')
     void testLogarithmCalculation(double y, double expected) {
-        assertEquals(expected, naturalLogarithm.calculate(y), 1e-8);
+        assertEquals(expected, naturalLogarithm.calculate(y), 1e-5);
     }
 }

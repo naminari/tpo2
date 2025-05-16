@@ -5,20 +5,24 @@ import java.io.IOException;
 
 import lab2.FunctionSystem;
 import log.Logarithm;
-import static log.Logarithm.ln;
 import trig.Trigonometry;
 
 public class CSVExporter {
     private static final String SEPARATOR = ";";
 
+    // Создаем экземпляры
+    private static final Trigonometry trig = new Trigonometry();
+    private static final Logarithm log = new Logarithm();
+    private static final FunctionSystem system = new FunctionSystem(1e-4, trig, log);
+
     public static void exportModule(String moduleName, double startX, double endX, double step) {
         String fileName = String.format("%.2f_Результаты_модуля_(%s).csv", startX, moduleName);
-        
+
         try (FileWriter writer = new FileWriter(fileName)) {
-            // Заголовок файла
+            // Заголовок
             writer.write("x" + SEPARATOR + "result\n");
-            
-            // Генерация данных
+
+            // Данные
             for (double x = startX; x <= endX; x += step) {
                 double result = computeModule(moduleName, x);
                 writer.write(x + SEPARATOR + result + "\n");
@@ -31,18 +35,17 @@ public class CSVExporter {
     private static double computeModule(String moduleName, double x) {
         switch (moduleName.toLowerCase()) {
             case "sin":
-                return Trigonometry.sin(x);
+                return trig.sin(x);
             case "cos":
-                return Trigonometry.cos(x);
+                return trig.cos(x);
             case "ln":
-                return ln(x);
+                return log.ln(x);
             case "system":
-                FunctionSystem system = new FunctionSystem();
                 return system.calculate(x);
             case "csc":
-                return Trigonometry.csc(x);
+                return trig.csc(x);
             case "sec":
-                return Trigonometry.sec(x);
+                return trig.sec(x);
             default:
                 throw new IllegalArgumentException("Неизвестный модуль: " + moduleName);
         }

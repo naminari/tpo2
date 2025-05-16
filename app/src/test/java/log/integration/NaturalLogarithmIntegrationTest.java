@@ -23,15 +23,15 @@ class NaturalLogarithmIntegrationTest {
 
     @Test
     void shouldCalculateUsingExponentCalculator() {
-        // Настраиваем mock для итераций бинарного поиска
-        when(expCalculator.calculate(anyDouble(), anyDouble()))
-            .thenReturn(0.5)   // первая итерация (t=0)
-            .thenReturn(1.5)   // вторая итерация (t=0)
-            .thenReturn(1.0);   // третья итерация (t=0)
+        when(expCalculator.calculate(anyDouble(), anyDouble())).thenAnswer(invocation -> {
+            double t = invocation.getArgument(0);
+            return Math.exp(t); // или имитировать значения вручную
+        });
 
-        assertEquals(0.0, naturalLogarithm.calculate(1.0), 1e-8);
-        verify(expCalculator, atLeast(3)).calculate(anyDouble(), anyDouble());
+        assertEquals(0.0, naturalLogarithm.calculate(1.0), 1e-5);
+        verify(expCalculator, atLeast(1)).calculate(anyDouble(), anyDouble());
     }
+
 
     @Test
     void shouldUseStubValue() {

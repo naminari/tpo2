@@ -6,7 +6,7 @@ import java.util.Map;
 import utils.*;
 
 public class NaturalLogarithm {
-    private static final double DEFAULT_EPSILON = 1e-10;
+    private static final double DEFAULT_EPSILON = 1e-5;
     private final Map<Double, Double> stubs = new HashMap<>();
     private final ExponentCalculator expCalculator;
     
@@ -21,26 +21,43 @@ public class NaturalLogarithm {
     public void addStub(double y, double value) {
         stubs.put(y, value);
     }
-    
+
     public double calculate(double y, double epsilon) {
         if (y <= 0) return Double.NaN;
         if (stubs.containsKey(y)) return stubs.get(y);
 
-        double low = -100;
-        double high = 100;
-        double t = 0;
+        // Ищем логарифм как x, такой что e^x = y
+        // Шаг 1: находим начальный диапазон [low, high], где exp(low) < y < exp(high)
+        double low = -1.0;
+        double high = 1.0;
 
+        while (expCalculator.calculate(high, epsilon) < y) {
+            low = high;
+            high *= 2;
+            if (high > 1e6) return Double.POSITIVE_INFINITY; // ограничение по диапазону
+        }
+        while (expCalculator.calculate(low, epsilon) > y) {
+            high = low;
+            low *= 2;
+            if (low < -1e6) return Double.NEGATIVE_INFINITY; // ограничение по диапазону
+        }
+
+        // Шаг 2: бинарный поиск
+        double mid = 0.0;
         while (high - low > epsilon) {
-            t = (low + high) / 2;
-            double et = expCalculator.calculate(t, epsilon);
-            if (et < y) {
-                low = t;
+            mid = (low + high) / 2;
+            double expMid = expCalculator.calculate(mid, epsilon);
+            if (expMid < y) {
+                low = mid;
             } else {
-                high = t;
+                high = mid;
             }
         }
-        return t;
+
+        return (low + high) / 2;
     }
+
+
     
     public double calculate(double y) {
         return calculate(y, DEFAULT_EPSILON);

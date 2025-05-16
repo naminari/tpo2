@@ -12,7 +12,7 @@ public class FunctionSystem {
 
     // Конструктор с возможностью инъекции зависимостей
     public FunctionSystem() {
-        this(1e-10, new Trigonometry(), new Logarithm());
+        this(1e-4, new Trigonometry(), new Logarithm());
     }
 
     public FunctionSystem(double epsilon, Trigonometry trigonometry, Logarithm logarithm) {
@@ -39,13 +39,13 @@ public class FunctionSystem {
     }
 
     private double calculateLogarithmicPart(double x) {
-        double lnX = Logarithm.ln(x);
+        double lnX = logarithm.ln(x);
         double log5X = logarithm.log(x, 5);
         double log3X = logarithm.log(x, 3);
         double log10X = logarithm.log(x, 10);
 
         double temp = lnX * log5X;
-        double powPart = Trigonometry.pow(temp, 12); // Оставил статическим, можно вынести в зависимость
+        double powPart = trigonometry.pow(temp, 12); // Оставил статическим, можно вынести в зависимость
         return powPart * (log3X - log5X - log10X);
     }
 }

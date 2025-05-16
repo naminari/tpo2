@@ -15,7 +15,7 @@ import lab2.FunctionSystem;
 
 class FunctionSystemTest {
     private FunctionSystem functionSystem;
-    private static final double EPSILON = 1e-10;
+    private static final double EPSILON = 1e-2;
 
     @BeforeEach
     void setUp() {

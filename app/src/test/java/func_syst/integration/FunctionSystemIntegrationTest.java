@@ -62,7 +62,10 @@ class FunctionSystemIntegrationTest {
         verify(logMock).log(TEST_X, 5);
         verify(logMock).log(TEST_X, 3);
         verify(logMock).log(TEST_X, 10);
-        verifyNoInteractions(trigMock);
+
+        verify(trigMock).pow(anyDouble(), eq(12));
+        verifyNoMoreInteractions(trigMock);
+
     }
 
     @Test
@@ -72,7 +75,12 @@ class FunctionSystemIntegrationTest {
         when(logMock.log(TEST_X, 3)).thenReturn(0.6309297536);
         when(logMock.log(TEST_X, 10)).thenReturn(0.3010299957);
 
-        double expected = -5.546e-8; // Примерное значение
+        double temp = 0.6931471806 * 0.4306765581;
+        when(trigMock.pow(temp, 12)).thenReturn(1.844e-07);
+
+        double expected = 1.844e-07 * (-0.1007768002); // ≈ -1.859e-08
+
         assertEquals(expected, functionSystem.calculate(TEST_X), EPSILON);
     }
+
 }
